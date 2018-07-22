@@ -28,8 +28,26 @@
 
         public function index(){
 
+            $hasil = $this->home_model->ambilProduk();
+            $data['hasil'] = $hasil;
+
+            // $this->cekArray($hasil);
+
             $this->load->view('front/header');
-            $this->load->view('front/home');
+            $this->load->view('front/home', $data);
+            $this->load->view('front/footer');
+
+        } // => end of function index
+
+        public function produkDetail($kodeProduk){
+
+            $hasil = $this->home_model->ambilProdukDanStok($kodeProduk);
+            $data['produk'] = $hasil;
+
+            // $this->cekArray($hasil);
+
+            $this->load->view('front/header');
+            $this->load->view('front/produkdetail', $data);
             $this->load->view('front/footer');
 
         }

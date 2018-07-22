@@ -14,11 +14,7 @@
     <!-- favicon -->
     <link rel="shortcut icon" type="image/png" href="<?php echo base_url() ?>asset/image/favicon-sancu.png"/>
     <!-- extra style -->
-    <style>
-      *{
-        font-family: verdana!important;
-      }
-    </style>
+    
     <title>Dashboard</title>
   </head>
   <body>
