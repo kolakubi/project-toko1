@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 22, 2018 at 11:25 AM
+-- Generation Time: Jul 22, 2018 at 05:54 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -41,6 +41,82 @@ INSERT INTO `kategori` (`kode_kategori`, `Nama_kategori`) VALUES
 ('kat001', 'makanan'),
 ('kat002', 'minuman'),
 ('kat003', 'alat mandi');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log`
+--
+
+CREATE TABLE `log` (
+  `kode_log` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `tanggal` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `ip` varchar(100) NOT NULL,
+  `status` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `log`
+--
+
+INSERT INTO `log` (`kode_log`, `username`, `tanggal`, `ip`, `status`) VALUES
+(1, 'mal', '2018-07-13 20:20:21', '::1', 'berhasil'),
+(2, 'mal', '2018-07-13 20:36:26', '::1', 'berhasil'),
+(3, 'mal', '2018-07-14 13:27:52', '::1', 'berhasil'),
+(4, 'mal', '2018-07-15 21:03:43', '::1', 'berhasil'),
+(5, 'mal', '2018-07-15 21:04:06', '::1', 'berhasil'),
+(6, 'mal', '2018-07-15 21:23:20', '::1', 'berhasil'),
+(7, 'mal', '2018-07-16 17:48:19', '::1', 'berhasil'),
+(8, 'mal', '2018-07-17 00:29:30', '::1', 'berhasil'),
+(9, 'mal', '2018-07-17 01:13:19', '::1', 'berhasil'),
+(10, 'mal', '2018-07-17 20:21:54', '::1', 'berhasil'),
+(11, 'mal', '2018-07-18 11:56:55', '::1', 'berhasil'),
+(12, 'mal', '2018-07-18 13:59:22', '::1', 'berhasil'),
+(13, 'admin', '2018-07-18 14:21:12', '::1', 'berhasil'),
+(14, 'admin', '2018-07-18 16:01:12', '::1', 'berhasil'),
+(15, 'mal', '2018-07-18 16:45:04', '::1', 'berhasil'),
+(16, 'admin', '2018-07-18 19:06:05', '::1', 'berhasil'),
+(17, 'mal', '2018-07-18 19:06:57', '::1', 'berhasil'),
+(18, 'admin', '2018-07-18 22:40:15', '::1', 'berhasil'),
+(19, 'mal', '2018-07-18 22:41:43', '::1', 'berhasil'),
+(20, 'user001', '2018-07-19 15:02:28', '::1', 'berhasil'),
+(21, 'admin', '2018-07-19 15:13:31', '::1', 'berhasil'),
+(22, 'admin', '2018-07-19 15:50:57', '::1', 'berhasil'),
+(23, 'admin', '2018-07-19 15:51:03', '::1', 'berhasil'),
+(24, 'mal', '2018-07-19 16:12:31', '::1', 'berhasil'),
+(25, 'mal', '2018-07-19 16:46:48', '::1', 'berhasil'),
+(26, 'wisnu', '2018-07-19 17:54:20', '::1', 'berhasil'),
+(27, 'admin', '2018-07-19 18:01:08', '::1', 'berhasil'),
+(28, 'wisnu', '2018-07-19 18:02:03', '::1', 'berhasil'),
+(29, 'admin', '2018-07-19 18:05:14', '::1', 'berhasil'),
+(30, 'mal', '2018-07-22 20:11:07', '::1', 'berhasil'),
+(31, 'mal2', '2018-07-22 20:29:22', '::1', 'berhasil'),
+(32, 'mal2', '2018-07-22 22:52:23', '::1', 'berhasil');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `login`
+--
+
+CREATE TABLE `login` (
+  `username` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `level` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `login`
+--
+
+INSERT INTO `login` (`username`, `password`, `email`, `level`) VALUES
+('admin', 'admin', 'admin@admin.com', 1),
+('mal', 'mal', 'mal@mal.com', 4),
+('mal2', 'mal', 'mal@mal.com', 4),
+('user001', 'user001', 'user@gmaiil.com', 4),
+('wisnu', '12345', 'wisnuwinz@gmail.com', 4);
 
 -- --------------------------------------------------------
 
@@ -115,6 +191,18 @@ ALTER TABLE `kategori`
   ADD PRIMARY KEY (`kode_kategori`);
 
 --
+-- Indexes for table `log`
+--
+ALTER TABLE `log`
+  ADD PRIMARY KEY (`kode_log`);
+
+--
+-- Indexes for table `login`
+--
+ALTER TABLE `login`
+  ADD PRIMARY KEY (`username`);
+
+--
 -- Indexes for table `produk`
 --
 ALTER TABLE `produk`
@@ -130,6 +218,11 @@ ALTER TABLE `stok`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `log`
+--
+ALTER TABLE `log`
+  MODIFY `kode_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `produk`
 --

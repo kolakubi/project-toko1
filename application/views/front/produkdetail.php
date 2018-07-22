@@ -4,7 +4,7 @@
 
     <!-- gambar produk -->
     <div class="col-xs-12 col-md-6">
-        <img src="<?php echo base_url() ?>asset/image/produk/<?php echo $produk['gambar_produk'] ?>" class="img img-responsive">
+        <img src="<?php echo base_url() ?>asset/image/produk/<?php echo $produk['gambar_produk'] ?>" class="img img-responsive" style="margin: 0 auto">
     </div>
 
     <!-- produk detail -->
@@ -17,14 +17,16 @@
         <hr>
         
         <!-- form -->
-        <?php echo form_open() ?>
+        <?php echo form_open('home/beli/'.$produk['kode_produk']) ?>
             <div class="form-group">
                 <label>Jumlah Pembelian</label>
                 <input name="jumlahpembelian" type="number" class="form-control">
+                <div style="background-color: #f44242; text-align: center;">
+                    <span style="color: white;"><?php echo form_error('jumlahpembelian') ?></span>
+                </div>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-success btn-lg">Beli</button>
-                <a href="<?php echo base_url() ?>home" class="btn btn-danger btn-lg">Kembali</a>
+                <button type="submit" class="btn btn-danger btn-lg btn-block">Beli</button>
             </div>
         <?php echo form_close() ?>
         
