@@ -39,8 +39,9 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li><a href="<?php echo base_url() ?>">Beranda</a></li>
-            <li><a href="<?php echo base_url() ?>#">Tentang</a></li>
+            <!-- <li><a href="<?php echo base_url() ?>">Beranda</a></li> -->
+            <li><a href="<?php echo base_url() ?>pelanggan/keranjang">Keranjang</a></li>
+            <li><a href="<?php echo base_url() ?>pelanggan/pesanan">Pesanan</a></li>
           </ul>
 
           <!-- jika blm login, tampilin tombol login -->
@@ -54,7 +55,6 @@
           <?php elseif(!empty($_SESSION['username'])) : ?>
           <ul class="nav navbar-nav navbar-right" style="margin-right: 20px;">
             <li><a>Halo, <?php echo $_SESSION['username'] ?></a></li>
-            <li><a href="<?php echo base_url() ?>pelanggan">Dashboard</a></li>
             <li><a href="<?php echo base_url() ?>logout">Logout</a></li>
           </ul> <!-- end of button login -->
           <?php endif ?>

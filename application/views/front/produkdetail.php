@@ -17,7 +17,7 @@
         <hr>
         
         <!-- form -->
-        <?php echo form_open('home/beli/'.$produk['kode_produk']) ?>
+        <?php echo form_open('home/tambahkeranjang/'.$produk['kode_produk']) ?>
             <div class="form-group">
                 <label>Jumlah Pembelian</label>
                 <input name="jumlahpembelian" type="number" class="form-control">
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-danger btn-lg btn-block">Beli</button>
+                <button type="submit" class="btn btn-danger btn-lg btn-block">Tambah Keranjang</button>
             </div>
         <?php echo form_close() ?>
         

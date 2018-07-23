@@ -52,7 +52,7 @@
 
         }
 
-        public function beli($kodeProduk){
+        public function tambahKeranjang($kodeProduk){
 
             $hasil = $this->home_model->ambilProdukDanStok($kodeProduk);
 
@@ -105,7 +105,7 @@
                     }
                     array_push($_SESSION['keranjang'], $itemYangDibeli);
 
-                    redirect('home/keranjang');
+                    redirect('pelanggan/keranjang');
 
                 } // end of validasi form
 
@@ -120,9 +120,82 @@
 
         public function keranjang(){
 
-            $this->load->view('front/header');
-            $this->load->view('front/keranjang');
-            $this->load->view('front/footer');
+            // cek jika ada session keranjang
+            if(empty($_SESSION['keranjang'])){
+                $_SESSION['keranjang'] = array();
+            }
+
+            // set form rule
+            $this->form_validation->set_rules(
+                array(
+                    array(
+                        'field' => 'pengiriman',
+                        'label' => 'Pengiriman',
+                        'rules' => 'required'
+                    ),
+                    array(
+                        'field' => 'packing',
+                        'label' => 'Packing',
+                        'rules' => 'required'
+                    ),
+                    array(
+                        'field' => 'namalengkap',
+                        'label' => 'Nama Lengkap',
+                        'rules' => 'required'
+                    ),
+                    array(
+                        'field' => 'telepon',
+                        'label' => 'Telepon',
+                        'rules' => 'required'
+                    ),
+                    array(
+                        'field' => 'alamat',
+                        'label' => 'Alamat',
+                        'rules' => 'required'
+                    )
+                )
+            );
+
+             // ubah pesan error
+            $this->form_validation->set_message('required', '%s Wajib diisi');
+
+            // jika submit gagal
+            if(!$this->form_validation->run()){
+
+                $this->load->view('front/header');
+                $this->load->view('front/keranjang');
+                $this->load->view('front/footer');
+
+            }
+            // jika berhasil
+            else{
+
+                // ambil semua variable
+                $pengiriman = $this->input->post('pengiriman');
+                $packing = $this->input->post('packing');
+                $namalengkap = $this->input->post('namalengkap');
+                $telepon = $this->input->post('telepon');
+                $alamat = $this->input->post('alamat');
+                $keranjang = $_SESSION['keranjang'];
+                $username = $_SESSION['username'];
+                $dataPembelian = array(
+                    'username' => $username,
+                    'pengiriman' => $pengiriman,
+                    'packing' => $packing,
+                    'keranjang' => $keranjang,
+                    'namalengkap' => $namalengkap,
+                    'telepon' => $telepon,
+                    'alamat' => $alamat
+                );
+
+                // echo '<pre>';
+                // print_r($dataPembelian);
+                // echo '</pre>';
+                
+                // passing data ke funciton pembelian
+                $this->pembelian($dataPembelian);
+
+            }
 
         }
 
@@ -133,6 +206,58 @@
 
             redirect('home/keranjang');
 
+        } // end of function hapusItemKeranjang
+
+        public function pembelian($dataPembelian){
+
+            // simpan data ke database
+            $result = $this->home_model->tambahPembelian($dataPembelian);
+
+            if($result){
+
+                // bersihin keranjang
+                unset($_SESSION['keranjang']);
+
+                // redurect ke invoice
+                redirect('home/konfirmasipemesanan');
+            }
+
+        } // end of function pembelian
+
+        public function konfirmasiPemesanan(){
+
+            $this->load->view('front/header');
+            $this->load->view('pelanggan/pembayaran');
+            $this->load->view('front/footer');
+
         }
 
     } // => end of class
+
+////////////////////////////////////////////
+// array session
+//     Array
+// (
+//     [__ci_last_regenerate] => 1532365813
+//     [username] => mal
+//     [password] => mal
+//     [email] => mal@mal.com
+//     [level] => 4
+//     [keranjang] => Array
+//         (
+//             [0] => Array
+//                 (
+//                     [kode_produk] => 1
+//                     [nama_produk] => Beras 20Kg Pandan Wangi
+//                     [jumlah_produk] => 10
+//                     [harga_produk_akumulasi] => 2400000
+//                 )
+//             [1] => Array
+//                 (
+//                     [kode_produk] => 4
+//                     [nama_produk] => Kuaci Saset Rebo
+//                     [jumlah_produk] => 10
+//                     [harga_produk_akumulasi] => 780000
+//                 )
+//         )
+// )

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 22, 2018 at 05:54 PM
+-- Generation Time: Jul 23, 2018 at 09:52 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -92,7 +92,8 @@ INSERT INTO `log` (`kode_log`, `username`, `tanggal`, `ip`, `status`) VALUES
 (29, 'admin', '2018-07-19 18:05:14', '::1', 'berhasil'),
 (30, 'mal', '2018-07-22 20:11:07', '::1', 'berhasil'),
 (31, 'mal2', '2018-07-22 20:29:22', '::1', 'berhasil'),
-(32, 'mal2', '2018-07-22 22:52:23', '::1', 'berhasil');
+(32, 'mal2', '2018-07-22 22:52:23', '::1', 'berhasil'),
+(33, 'mal', '2018-07-23 23:49:35', '::1', 'berhasil');
 
 -- --------------------------------------------------------
 
@@ -117,6 +118,57 @@ INSERT INTO `login` (`username`, `password`, `email`, `level`) VALUES
 ('mal2', 'mal', 'mal@mal.com', 4),
 ('user001', 'user001', 'user@gmaiil.com', 4),
 ('wisnu', '12345', 'wisnuwinz@gmail.com', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pembelian`
+--
+
+CREATE TABLE `pembelian` (
+  `kode_pembelian` int(11) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `metode_packing` varchar(20) NOT NULL,
+  `metode_pengiriman` varchar(20) NOT NULL,
+  `catatan_pembelian` text NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `tanggal_pembelian` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `namalengkap` varchar(255) NOT NULL,
+  `telepon` varchar(30) NOT NULL,
+  `alamat` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pembelian`
+--
+
+INSERT INTO `pembelian` (`kode_pembelian`, `username`, `metode_packing`, `metode_pengiriman`, `catatan_pembelian`, `status`, `tanggal_pembelian`, `namalengkap`, `telepon`, `alamat`) VALUES
+(3, 'mal', 'Kardus', 'Diantar', '', '', '2018-07-24 01:11:11', 'mal', '+622187704765', 'JALAN KELAPA DUA WETAN III NO 29'),
+(4, 'mal', 'semen', 'Go Send', '', '', '2018-07-24 01:13:51', 'Mal', '+622187704765', 'JALAN KELAPA DUA WETAN III NO 29'),
+(5, 'mal', 'Kardus', 'Diambil', '', '', '2018-07-24 01:16:33', 'Mal', '+622187704765', 'JALAN KELAPA DUA WETAN III NO 29');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pembelian_detail`
+--
+
+CREATE TABLE `pembelian_detail` (
+  `kode_pembelian_detail` int(11) NOT NULL,
+  `kode_pembelian` int(11) NOT NULL,
+  `jumlah_item_pembelian_detail` int(11) NOT NULL,
+  `kode_produk` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pembelian_detail`
+--
+
+INSERT INTO `pembelian_detail` (`kode_pembelian_detail`, `kode_pembelian`, `jumlah_item_pembelian_detail`, `kode_produk`) VALUES
+(1, 3, 10, 1),
+(2, 3, 10, 4),
+(3, 4, 40, 5),
+(4, 5, 100, 8);
 
 -- --------------------------------------------------------
 
@@ -203,6 +255,18 @@ ALTER TABLE `login`
   ADD PRIMARY KEY (`username`);
 
 --
+-- Indexes for table `pembelian`
+--
+ALTER TABLE `pembelian`
+  ADD PRIMARY KEY (`kode_pembelian`);
+
+--
+-- Indexes for table `pembelian_detail`
+--
+ALTER TABLE `pembelian_detail`
+  ADD PRIMARY KEY (`kode_pembelian_detail`);
+
+--
 -- Indexes for table `produk`
 --
 ALTER TABLE `produk`
@@ -222,7 +286,17 @@ ALTER TABLE `stok`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `kode_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `kode_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+--
+-- AUTO_INCREMENT for table `pembelian`
+--
+ALTER TABLE `pembelian`
+  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `pembelian_detail`
+--
+ALTER TABLE `pembelian_detail`
+  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `produk`
 --
