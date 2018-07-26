@@ -6,6 +6,23 @@
 
             parent::__construct();
 
+            // cek session
+            // cek session pelanggan yaitu level 4
+            if($_SESSION['level']){
+                $sessionLevel = $_SESSION['level'];
+                    if($sessionLevel != 4){
+                    // jika level bukan 4, redirect ke login
+                    redirect('login');
+                }
+            }
+            else{
+                redirect('login');
+            }
+
+            if(empty($_SESSION['keranjang'])){
+                $_SESSION['keranjang'] = array();
+            }
+
         }
 
         public function index(){
@@ -95,7 +112,7 @@
 
             }
 
-        }
+        } // => end of function keranjang
 
         public function hapusItemKeranjang($index){
 
@@ -105,6 +122,22 @@
             redirect('pelanggan/keranjang');
 
         } // end of function hapusItemKeranjang
+
+        public function pembelian($dataPembelian){
+
+            // simpan data ke database
+            $result = $this->pelanggan_model->tambahPembelian($dataPembelian);
+
+            if($result){
+
+                // bersihin keranjang
+                unset($_SESSION['keranjang']);
+
+                // redurect ke invoice
+                redirect('pelanggan/pesanan');
+            }
+
+        } // end of function pembelian
 
 
         public function pesanan(){
@@ -146,8 +179,79 @@
             $this->load->view('pelanggan/pesanan', $data);
             $this->load->view('front/footer');
 
-        }
+        } // => end of function pesanan
 
+        public function pesananDetail($kodePembelian){
 
+            $hasil = $this->pelanggan_model->pembelianDetailAmbil($kodePembelian);
+            $data['hasil'] = $hasil;
 
-    }
+            // echo '<pre>';
+            // print_r($hasil);
+            // echo '</pre>';
+
+            $this->load->view('pelanggan/header');
+            $this->load->view('pelanggan/pesanandetail', $data);
+            $this->load->view('front/footer');
+
+        } // end of function pesananDetail
+
+        public function uploadBuktiBayar($kodePembelian){
+
+            // passing kode pendaftaran
+            $data['kodepembelian'] = $kodePembelian;
+
+            // inisiasi variable
+            $dataFileBuktiPembayaran = array();
+
+            // rule biar harus diisi
+            if(empty($_FILES['buktibayar']['name'])){
+                $this->form_validation->set_rules('buktibayar', 'Document', 'required');
+            }
+
+            // ubah pesan error
+            $this->form_validation->set_message('required', '%s tidak boleh kosong');
+
+            // validasi kelengkapan form
+            if(!$this->form_validation->run() 
+            && empty($_FILES['buktibayar']['name'])){
+                
+                $this->load->view('pelanggan/header');
+                $this->load->view('pelanggan/uploadbuktibayar', $data);
+                $this->load->view('front/footer');
+                
+            }
+            else{
+
+                // atur config file
+                $config['upload_path'] = './uploads/buktibayar';
+                $config['allowed_types'] = 'gif|jpg|png';
+                $config['max_size'] = 500;
+
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+
+                // upload file
+                // bukti bayar
+                if(!$this->upload->do_upload('buktibayar')){
+
+                    echo $this->upload->display_errors();
+                }
+                else{
+                    $dataFileBuktiPembayaran = $this->upload->data();
+                    $dataBerkas = array(
+                        'nama_file' => $dataFileBuktiPembayaran['file_name'],
+                        'kode_pembelian' => $kodePembelian
+                    );
+
+                    $this->pelanggan_model->uploadBuktiBayar($dataBerkas);
+                }
+                ////////////////////////////////////////////
+
+                redirect('pelanggan/pesanan');
+
+            } // end of validasi form
+
+        } // end of function uploadBuktiBayar
+
+    } // end of class

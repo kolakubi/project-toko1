@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 23, 2018 at 09:52 PM
+-- Generation Time: Jul 26, 2018 at 08:06 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 5.6.31
 
@@ -93,7 +93,13 @@ INSERT INTO `log` (`kode_log`, `username`, `tanggal`, `ip`, `status`) VALUES
 (30, 'mal', '2018-07-22 20:11:07', '::1', 'berhasil'),
 (31, 'mal2', '2018-07-22 20:29:22', '::1', 'berhasil'),
 (32, 'mal2', '2018-07-22 22:52:23', '::1', 'berhasil'),
-(33, 'mal', '2018-07-23 23:49:35', '::1', 'berhasil');
+(33, 'mal', '2018-07-23 23:49:35', '::1', 'berhasil'),
+(34, 'mal', '2018-07-26 22:12:43', '::1', 'berhasil'),
+(35, 'mal', '2018-07-26 22:16:52', '::1', 'berhasil'),
+(36, 'admin', '2018-07-26 22:17:29', '::1', 'berhasil'),
+(37, 'mal', '2018-07-26 22:17:57', '::1', 'berhasil'),
+(38, 'admin', '2018-07-27 00:37:31', '::1', 'berhasil'),
+(39, 'mal', '2018-07-27 01:05:34', '::1', 'berhasil');
 
 -- --------------------------------------------------------
 
@@ -122,6 +128,27 @@ INSERT INTO `login` (`username`, `password`, `email`, `level`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pembayaran`
+--
+
+CREATE TABLE `pembayaran` (
+  `kode_pembayaran` int(11) NOT NULL,
+  `kode_pembelian` int(11) NOT NULL,
+  `total_harga_pembayaran` int(11) NOT NULL,
+  `file_bukti_pembayaran` text NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pembayaran`
+--
+
+INSERT INTO `pembayaran` (`kode_pembayaran`, `kode_pembelian`, `total_harga_pembayaran`, `file_bukti_pembayaran`, `status`) VALUES
+(1, 7, 2341500, 'logo-bank-mandiri.png', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pembelian`
 --
 
@@ -145,7 +172,9 @@ CREATE TABLE `pembelian` (
 INSERT INTO `pembelian` (`kode_pembelian`, `username`, `metode_packing`, `metode_pengiriman`, `catatan_pembelian`, `status`, `tanggal_pembelian`, `namalengkap`, `telepon`, `alamat`) VALUES
 (3, 'mal', 'Kardus', 'Diantar', '', '', '2018-07-24 01:11:11', 'mal', '+622187704765', 'JALAN KELAPA DUA WETAN III NO 29'),
 (4, 'mal', 'semen', 'Go Send', '', '', '2018-07-24 01:13:51', 'Mal', '+622187704765', 'JALAN KELAPA DUA WETAN III NO 29'),
-(5, 'mal', 'Kardus', 'Diambil', '', '', '2018-07-24 01:16:33', 'Mal', '+622187704765', 'JALAN KELAPA DUA WETAN III NO 29');
+(5, 'mal', 'Kardus', 'Diambil', '', '', '2018-07-24 01:16:33', 'Mal', '+622187704765', 'JALAN KELAPA DUA WETAN III NO 29'),
+(6, 'mal', 'semen', 'Go Send', '', '', '2018-07-26 23:30:34', 'solatip', '+622187704765', 'JALAN KELAPA DUA WETAN III NO 29'),
+(7, 'mal', 'semen', 'Go Send', '', '', '2018-07-26 23:30:53', 'solatip', '+622187704765', 'JALAN KELAPA DUA WETAN III NO 29');
 
 -- --------------------------------------------------------
 
@@ -168,7 +197,11 @@ INSERT INTO `pembelian_detail` (`kode_pembelian_detail`, `kode_pembelian`, `juml
 (1, 3, 10, 1),
 (2, 3, 10, 4),
 (3, 4, 40, 5),
-(4, 5, 100, 8);
+(4, 5, 100, 8),
+(5, 6, 21, 8),
+(6, 6, 42, 9),
+(7, 7, 21, 8),
+(8, 7, 42, 9);
 
 -- --------------------------------------------------------
 
@@ -255,6 +288,12 @@ ALTER TABLE `login`
   ADD PRIMARY KEY (`username`);
 
 --
+-- Indexes for table `pembayaran`
+--
+ALTER TABLE `pembayaran`
+  ADD PRIMARY KEY (`kode_pembayaran`);
+
+--
 -- Indexes for table `pembelian`
 --
 ALTER TABLE `pembelian`
@@ -286,17 +325,22 @@ ALTER TABLE `stok`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `kode_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `kode_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+--
+-- AUTO_INCREMENT for table `pembayaran`
+--
+ALTER TABLE `pembayaran`
+  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `pembelian_detail`
 --
 ALTER TABLE `pembelian_detail`
-  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `produk`
 --

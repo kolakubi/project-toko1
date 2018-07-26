@@ -6,7 +6,7 @@
 
         <table class="table table-responsive table-striped table-bordered table-hover">
             <thead>
-                <tr>
+                <tr class="info">
                     <th>Kode Pembelian</th>
                     <th>Nama</th>
                     <th>Telepon</th>
@@ -23,7 +23,7 @@
                         <td><?php echo $pembelian['telepon'] ?></td>
                         <td><?php echo $pembelian['tanggal_pembelian'] ?></td>
                         <td>
-                            <a href="" class="btn btn-info">Detail</a>
+                            <a href="<?php echo base_url() ?>pelanggan/pesanandetail/<?php echo $pembelian['kode_pembelian'] ?>" class="btn btn-info">Detail</a>
                         </td>
                     </tr>
                 <?php endforeach ?>
