@@ -34,16 +34,22 @@
 
         public function stok(){
 
+            $hasil = $this->admin_model->ambilDataStok();
+            $data['hasil'] = $hasil;
+
             $this->load->view('admin/header');
-            $this->load->view('admin/stok');
+            $this->load->view('admin/stok', $data);
             $this->load->view('front/footer');
 
         } // end of function stok
 
         public function produk(){
 
+            $hasil = $this->admin_model->ambilDataProduk();
+            $data['hasil'] = $hasil;
+
             $this->load->view('admin/header');
-            $this->load->view('admin/produk');
+            $this->load->view('admin/produk', $data);
             $this->load->view('front/footer');
 
         } // end of function produk

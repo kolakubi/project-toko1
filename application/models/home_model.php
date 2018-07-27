@@ -8,10 +8,16 @@
 
         }
 
-        public function ambilProduk(){
+        public function ambilProduk($keywords=null, $kategori=null){
 
             $this->db->select('*');
             $this->db->from('produk');
+
+            if($keywords || $kategori){
+                $this->db->like('nama_produk', $keywords);
+                $this->db->like('kode_kategory', $kategori);
+            }
+
             $hasil = $this->db->get()->result_array();
             return $hasil;
 
@@ -27,5 +33,14 @@
             return $hasil;
 
         } // end of function ambilProdukDanStok
+
+        public function ambilKategori(){
+
+            $this->db->select('*');
+            $this->db->from('kategori');
+            $hasil = $this->db->get()->result_array();
+            return $hasil;
+
+        }
 
     } // end of class

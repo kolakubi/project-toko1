@@ -28,10 +28,26 @@
 
         public function index(){
 
-            $hasil = $this->home_model->ambilProduk();
-            $data['hasil'] = $hasil;
+            // ambil list kategori
+            $listKategori = $this->home_model->ambilKategori();
 
-            // $this->cekArray($hasil);
+            // ambil value
+            $keywords = $this->input->post('keywords');
+            $kategori = $this->input->post('kategori');
+            $hasil = array();
+
+            // jika ada keywords
+            if($keywords || $kategori){
+                $hasil = $this->home_model->ambilProduk($keywords, $kategori);
+            }
+            else{
+                $hasil = $this->home_model->ambilProduk();
+            }
+            
+            $data['hasil'] = $hasil;
+            $data['listKategori'] = $listKategori;
+
+            //$this->cekArray($data);
 
             $this->load->view('front/header');
             $this->load->view('front/home', $data);

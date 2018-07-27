@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.8.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 26, 2018 at 08:06 PM
--- Server version: 10.1.25-MariaDB
--- PHP Version: 5.6.31
+-- Generation Time: Jul 27, 2018 at 09:46 AM
+-- Server version: 10.1.31-MariaDB
+-- PHP Version: 7.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,14 +30,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `kategori` (
   `kode_kategori` varchar(20) NOT NULL,
-  `Nama_kategori` varchar(50) NOT NULL
+  `nama_kategori` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `kategori`
 --
 
-INSERT INTO `kategori` (`kode_kategori`, `Nama_kategori`) VALUES
+INSERT INTO `kategori` (`kode_kategori`, `nama_kategori`) VALUES
 ('kat001', 'makanan'),
 ('kat002', 'minuman'),
 ('kat003', 'alat mandi');
@@ -99,7 +99,14 @@ INSERT INTO `log` (`kode_log`, `username`, `tanggal`, `ip`, `status`) VALUES
 (36, 'admin', '2018-07-26 22:17:29', '::1', 'berhasil'),
 (37, 'mal', '2018-07-26 22:17:57', '::1', 'berhasil'),
 (38, 'admin', '2018-07-27 00:37:31', '::1', 'berhasil'),
-(39, 'mal', '2018-07-27 01:05:34', '::1', 'berhasil');
+(39, 'mal', '2018-07-27 01:05:34', '::1', 'berhasil'),
+(40, 'admin', '2018-07-27 11:04:29', '::1', 'berhasil'),
+(41, 'admin', '2018-07-27 13:20:19', '::1', 'berhasil'),
+(42, 'admin', '2018-07-27 14:26:22', '::1', 'berhasil'),
+(43, 'mal', '2018-07-27 14:26:28', '::1', 'berhasil'),
+(44, 'admin', '2018-07-27 14:41:57', '::1', 'berhasil'),
+(45, 'kolak', '2018-07-27 14:42:53', '::1', 'berhasil'),
+(46, 'admin', '2018-07-27 14:45:05', '::1', 'berhasil');
 
 -- --------------------------------------------------------
 
@@ -120,6 +127,7 @@ CREATE TABLE `login` (
 
 INSERT INTO `login` (`username`, `password`, `email`, `level`) VALUES
 ('admin', 'admin', 'admin@admin.com', 1),
+('kolak', 'kolak', 'kolak@kolak', 4),
 ('mal', 'mal', 'mal@mal.com', 4),
 ('mal2', 'mal', 'mal@mal.com', 4),
 ('user001', 'user001', 'user@gmaiil.com', 4),
@@ -144,7 +152,8 @@ CREATE TABLE `pembayaran` (
 --
 
 INSERT INTO `pembayaran` (`kode_pembayaran`, `kode_pembelian`, `total_harga_pembayaran`, `file_bukti_pembayaran`, `status`) VALUES
-(1, 7, 2341500, 'logo-bank-mandiri.png', 0);
+(1, 7, 2341500, 'logo-bank-mandiri.png', 0),
+(2, 8, 8700000, 'bisnis-online.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -174,7 +183,8 @@ INSERT INTO `pembelian` (`kode_pembelian`, `username`, `metode_packing`, `metode
 (4, 'mal', 'semen', 'Go Send', '', '', '2018-07-24 01:13:51', 'Mal', '+622187704765', 'JALAN KELAPA DUA WETAN III NO 29'),
 (5, 'mal', 'Kardus', 'Diambil', '', '', '2018-07-24 01:16:33', 'Mal', '+622187704765', 'JALAN KELAPA DUA WETAN III NO 29'),
 (6, 'mal', 'semen', 'Go Send', '', '', '2018-07-26 23:30:34', 'solatip', '+622187704765', 'JALAN KELAPA DUA WETAN III NO 29'),
-(7, 'mal', 'semen', 'Go Send', '', '', '2018-07-26 23:30:53', 'solatip', '+622187704765', 'JALAN KELAPA DUA WETAN III NO 29');
+(7, 'mal', 'semen', 'Go Send', '', '', '2018-07-26 23:30:53', 'solatip', '+622187704765', 'JALAN KELAPA DUA WETAN III NO 29'),
+(8, 'kolak', 'semen', 'Diantar', '', '', '2018-07-27 14:44:18', 'kolak pisang', '02187704765', 'asd');
 
 -- --------------------------------------------------------
 
@@ -201,7 +211,10 @@ INSERT INTO `pembelian_detail` (`kode_pembelian_detail`, `kode_pembelian`, `juml
 (5, 6, 21, 8),
 (6, 6, 42, 9),
 (7, 7, 21, 8),
-(8, 7, 42, 9);
+(8, 7, 42, 9),
+(9, 8, 50, 4),
+(10, 8, 40, 5),
+(11, 8, 10, 7);
 
 -- --------------------------------------------------------
 
@@ -325,32 +338,38 @@ ALTER TABLE `stok`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `kode_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `kode_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+
 --
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT for table `pembelian_detail`
 --
 ALTER TABLE `pembelian_detail`
-  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
   MODIFY `kode_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT for table `stok`
 --
 ALTER TABLE `stok`
-  MODIFY `kode_stok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;COMMIT;
+  MODIFY `kode_stok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

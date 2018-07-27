@@ -254,4 +254,12 @@
 
         } // end of function uploadBuktiBayar
 
+        public function pembayaran(){
+
+            $this->load->view('pelanggan/header');
+            $this->load->view('pelanggan/pembayaran');
+            $this->load->view('front/footer');
+
+        }
+
     } // end of class

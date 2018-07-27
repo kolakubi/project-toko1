@@ -20,7 +20,7 @@
                 <?php foreach($hasil as $pembelian) : ?>
                     <tr>
                         <td><?php echo $pembelian['kode_pembelian'] ?></td>
-                        <td><?php echo $pembelian['total_harga_pembayaran'] ?></td>
+                        <td><?php echo 'Rp '.number_format($pembelian['total_harga_pembayaran'], 0, ',', '.') ?></td>
                         <td>
                             <a href="<?php echo base_url().'uploads/buktibayar/'.$pembelian['file_bukti_pembayaran'] ?>" target="_blank">Lihat Berkas</a>
                         </td>

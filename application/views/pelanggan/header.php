@@ -42,6 +42,7 @@
             <!-- <li><a href="<?php echo base_url() ?>">Beranda</a></li> -->
             <li><a href="<?php echo base_url() ?>pelanggan/keranjang">Keranjang</a></li>
             <li><a href="<?php echo base_url() ?>pelanggan/pesanan">Pesanan</a></li>
+            <li><a href="<?php echo base_url() ?>pelanggan/pembayaran">Pembayaran</a></li>
           </ul>
 
           <!-- jika blm login, tampilin tombol login -->

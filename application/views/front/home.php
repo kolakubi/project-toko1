@@ -3,7 +3,7 @@
     <div class="col-xs-12">
 
         <div class="alert alert-primary">
-            <?php echo form_open('home/cari')?>
+            <?php echo form_open('home')?>
                 <div class="form-group">
                     <div class="input-group">
                         <input type="text" class="form-control" name="keywords" placeholder="Cari Produk...">
@@ -24,17 +24,14 @@
             <!-- list -->
             <div class="form-group">
                 <label style="color: #222">Kategori: </label>
-                <select class="form-control" name="paket">
+                <select class="form-control" name="kategori">
 
                     <option>-Pilih Kategori-</option>
-                    <!-- <?php foreach($hasil as $dataProduk) : ?>
-                        <option value="<?php echo $dataProduk['kode_produk']?>"><?php echo $dataProduk['nama_produk']?></option>
-                    <?php endforeach ?> -->
+                    <?php foreach($listKategori as $dataProduk) : ?>
+                        <option value="<?php echo $dataProduk['kode_kategori']?>"><?php echo $dataProduk['nama_kategori']?></option>
+                    <?php endforeach ?>
 
                 </select>
-                <div style="background-color: #f44242; text-align: center;">
-                    <span style="color: white;"><?php echo form_error('paket') ?></span>
-                </div>
             </div>
 
             <!-- button submit -->
