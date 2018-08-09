@@ -10,7 +10,7 @@
 <!-- tambah produk -->
 <div class="row">
     <div class="col-xs-12">
-        <a href="" class="btn btn-info">Tambah Produk +</a>
+        <a href="<?php echo base_url() ?>admin/produktambah" class="btn btn-info">Tambah Produk +</a>
     </div>
 </div>
 <br><br>

@@ -147,6 +147,10 @@
             $hasil = $this->pelanggan_model->ambilPembelian($username);
             $data['hasil'] = $hasil;
 
+            // echo '<pre>';
+            // print_r($hasil);
+            // echo '</pre>';
+
             // [0] => Array
             //     (
             //         [kode_pembelian] => 3
@@ -196,10 +200,10 @@
 
         } // end of function pesananDetail
 
-        public function uploadBuktiBayar($kodePembelian){
+        public function uploadBuktiBayar($kodePembayaran){
 
             // passing kode pendaftaran
-            $data['kodepembelian'] = $kodePembelian;
+            $data['kodepembayaran'] = $kodePembayaran;
 
             // inisiasi variable
             $dataFileBuktiPembayaran = array();
@@ -241,14 +245,14 @@
                     $dataFileBuktiPembayaran = $this->upload->data();
                     $dataBerkas = array(
                         'nama_file' => $dataFileBuktiPembayaran['file_name'],
-                        'kode_pembelian' => $kodePembelian
+                        'kode_pembayaran' => $kodePembayaran
                     );
 
                     $this->pelanggan_model->uploadBuktiBayar($dataBerkas);
                 }
                 ////////////////////////////////////////////
 
-                redirect('pelanggan/pesanan');
+                redirect('pelanggan/pembayaran');
 
             } // end of validasi form
 
@@ -256,8 +260,11 @@
 
         public function pembayaran(){
 
+            $hasil = $this->pelanggan_model->ambilPembayaran();
+            $data['hasil'] = $hasil;
+
             $this->load->view('pelanggan/header');
-            $this->load->view('pelanggan/pembayaran');
+            $this->load->view('pelanggan/pembayaran', $data);
             $this->load->view('front/footer');
 
         }

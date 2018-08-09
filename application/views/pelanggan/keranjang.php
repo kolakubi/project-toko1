@@ -20,8 +20,9 @@
             <thead>
                 <tr class="info">
                     <th class="text-center">Produk</th>
+                    <th class="text-center">Harga Satuan</th>
                     <th class="text-center">Jumlah Item</th>
-                    <th class="text-center">Harga</th>
+                    <th class="text-center">Total Harga</th>
                     <th class="text-center">Action</th>
                 </tr>
             </thead>
@@ -29,6 +30,7 @@
                 <?php foreach($_SESSION['keranjang'] as $produk) : ?>
                     <tr>
                         <td><?php echo $produk['nama_produk'] ?></td>
+                        <td><?php echo 'Rp '.number_format($produk['harga_satuan'], 0, ',', '.') ?></td>
                         <td><?php echo $produk['jumlah_produk'] ?></td>
                         <td><?php echo 'Rp '.number_format($produk['harga_produk_akumulasi'], 0, ',', '.') ?></td>
                         <td><a href="<?php echo base_url()?>home/hapusItemKeranjang/<?php echo $index ?>"  class="btn btn-danger">-</a></td>
@@ -39,6 +41,7 @@
                 <?php endforeach ?>
                 <tr class="success">
                     <td><strong>Total</strong></td>
+                    <td></td>
                     <td><strong><?php echo $totalItem ?></strong></td>
                     <td><strong><?php echo 'Rp '.number_format($totalHarga, 0, ',', '.') ?></strong></td>
                     <td></td>
@@ -101,7 +104,7 @@
                 <select class="form-control" name="packing">
                     <option value="">-Pilih Packing-</option>
                     <option value="Kardus">Kardus</option>
-                    <option value="semen">Semen</option>
+                    <option value="semen">karung Semen</option>
                 </select>
                 <div style="background-color: #f44242; text-align: center;">
                     <span style="color: white;"><?php echo form_error('packing') ?></span>

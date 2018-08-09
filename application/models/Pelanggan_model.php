@@ -12,7 +12,8 @@
 
             $this->db->select('*');
             $this->db->from('pembelian');
-            $this->db->where('username', $username);
+            $this->db->join('pembayaran', 'pembayaran.kode_pembelian = pembelian.kode_pembelian');
+            $this->db->where('pembelian.username', $username);
             $hasil = $this->db->get()->result_array();
             return $hasil;
 
@@ -96,12 +97,35 @@
 
             $this->db->set(
                 array(
-                    'file_bukti_pembayaran' => $dataBerkas['nama_file']
+                    'file_bukti_pembayaran' => $dataBerkas['nama_file'],
+                    'status' => 2
                 )
             );
-            $this->db->where('kode_pembelian', $dataBerkas['kode_pembelian']);
+            $this->db->where('kode_pembayaran', $dataBerkas['kode_pembayaran']);
             $this->db->update('pembayaran');
 
-        }
+            return true;
+
+        } // end of function uploadBuktiBayar
+
+        public function ambilPembayaran($kodePembayaran=null){
+
+            $hasil = array();
+
+            $this->db->select('*');
+            $this->db->from('pembayaran');
+            
+            // jika ada kode Pembayaran
+            if($kodePembayaran){
+                $this->db->where('kode_pembayaran', $kodePembayaran);
+                $hasil = $this->db->get()->row_array();
+            }
+            else{
+                $hasil = $this->db->get()->result_array();
+            }
+
+            return $hasil;
+
+        } // end of function ambilPembayaran
 
     }

@@ -110,6 +110,7 @@
                         'kode_produk' => $kodeProduk,
                         'nama_produk' => $hasil['nama_produk'],
                         'jumlah_produk' => $banyakItem,
+                        'harga_satuan' => $hasil['harga_produk'],
                         'harga_produk_akumulasi' => $hasil['harga_produk']*$banyakItem
                     );
 

@@ -13,6 +13,7 @@
                     <th>Total Pembelian</th>
                     <th>Berkas</th>
                     <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
 
@@ -22,11 +23,32 @@
                         <td><?php echo $pembelian['kode_pembelian'] ?></td>
                         <td><?php echo 'Rp '.number_format($pembelian['total_harga_pembayaran'], 0, ',', '.') ?></td>
                         <td>
-                            <a href="<?php echo base_url().'uploads/buktibayar/'.$pembelian['file_bukti_pembayaran'] ?>" target="_blank">Lihat Berkas</a>
+                            <!-- jika ada berkas -->
+                            <?php if($pembelian['file_bukti_pembayaran']) : ?>
+                                <a href="<?php echo base_url().'uploads/buktibayar/'.$pembelian['file_bukti_pembayaran'] ?>" target="_blank">Lihat Berkas</a>
+                            <!-- jika tidak ada berkas -->
+                            <?php else : ?>
+                                <a>Tidak ada berkas</a>
+                            <?php endif ?>
                         </td>
                         <td>
-                            <a href="#" class="btn btn-success">Valid</a>
-                            <a href="#" class="btn btn-danger">Tidak Valid</a>
+                            <?php if($pembelian['status'] == 0){echo "belum diperiksa";}elseif($pembelian['status']==2){echo 'berkas sedang diperiksa';}elseif($pembelian['status']==3){echo 'berkas tidak valid';}else{echo 'Lunas';} ?>
+                        </td>
+                        <td>
+                            <!-- jika ada berkas -->
+                            <?php if($pembelian['file_bukti_pembayaran']) : ?>
+                                <?php if($pembelian['status'] == 0 || $pembelian['status'] == 2 || $pembelian['status'] == 3) : ?>
+                                    <!-- berkas valid -->
+                                    <a href="<?php echo base_url() ?>admin/pembayaranvalid/<?php echo $pembelian['kode_pembayaran'] ?>" class="btn btn-success">Valid</a>
+                                    <!-- berkas tidak valid -->
+                                    <a href="<?php echo base_url() ?>admin/pembayarantidakvalid/<?php echo $pembelian['kode_pembayaran'] ?>" class="btn btn-danger">Tidak Valid</a>
+                                <?php else : ?>
+                                <a class="btn btn-success">Valid</a>
+                                    <?php endif ?>
+                            <!-- jika tidak ada berkas -->
+                            <?php else : ?>
+                            <a class="btn btn-default">Tidak ada berkas</a>
+                            <?php endif ?>
                         </td>
                     </tr>
                 <?php endforeach ?>

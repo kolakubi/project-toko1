@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2018 at 09:46 AM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 7.2.4
+-- Generation Time: Aug 09, 2018 at 07:27 PM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -40,7 +40,8 @@ CREATE TABLE `kategori` (
 INSERT INTO `kategori` (`kode_kategori`, `nama_kategori`) VALUES
 ('kat001', 'makanan'),
 ('kat002', 'minuman'),
-('kat003', 'alat mandi');
+('kat003', 'alat mandi'),
+('kat004', 'alat tulis');
 
 -- --------------------------------------------------------
 
@@ -106,7 +107,34 @@ INSERT INTO `log` (`kode_log`, `username`, `tanggal`, `ip`, `status`) VALUES
 (43, 'mal', '2018-07-27 14:26:28', '::1', 'berhasil'),
 (44, 'admin', '2018-07-27 14:41:57', '::1', 'berhasil'),
 (45, 'kolak', '2018-07-27 14:42:53', '::1', 'berhasil'),
-(46, 'admin', '2018-07-27 14:45:05', '::1', 'berhasil');
+(46, 'admin', '2018-07-27 14:45:05', '::1', 'berhasil'),
+(47, 'admin', '2018-07-27 16:39:04', '::1', 'berhasil'),
+(48, 'mal', '2018-07-27 18:09:32', '::1', 'berhasil'),
+(49, 'ryan', '2018-08-03 19:12:10', '::1', 'berhasil'),
+(50, 'admin', '2018-08-03 19:13:52', '::1', 'berhasil'),
+(51, 'admin', '2018-08-03 19:14:28', '::1', 'berhasil'),
+(52, 'ryan', '2018-08-03 19:14:40', '::1', 'berhasil'),
+(53, 'mal', '2018-08-08 01:45:19', '::1', 'berhasil'),
+(54, 'mal', '2018-08-08 01:55:15', '::1', 'berhasil'),
+(55, 'mal', '2018-08-08 20:26:59', '::1', 'berhasil'),
+(56, 'admin', '2018-08-08 21:31:14', '::1', 'berhasil'),
+(57, 'mal', '2018-08-08 22:31:02', '::1', 'berhasil'),
+(58, 'admin', '2018-08-08 22:35:27', '::1', 'berhasil'),
+(59, 'mal', '2018-08-08 22:41:08', '::1', 'berhasil'),
+(60, 'admin', '2018-08-08 22:41:48', '::1', 'berhasil'),
+(61, 'mal', '2018-08-08 22:42:03', '::1', 'berhasil'),
+(62, 'admin', '2018-08-08 23:12:17', '::1', 'berhasil'),
+(63, 'mal', '2018-08-08 23:12:48', '::1', 'berhasil'),
+(64, 'admin', '2018-08-08 23:29:05', '::1', 'berhasil'),
+(65, 'mal', '2018-08-08 23:29:23', '::1', 'berhasil'),
+(66, 'admin', '2018-08-08 23:29:47', '::1', 'berhasil'),
+(67, 'admin', '2018-08-09 17:20:07', '::1', 'berhasil'),
+(68, 'admin', '2018-08-09 23:12:56', '::1', 'berhasil'),
+(69, 'admin', '2018-08-09 23:59:42', '::1', 'gagal'),
+(70, 'admin', '2018-08-09 23:59:46', '::1', 'berhasil'),
+(71, 'admin', '2018-08-10 00:24:14', '::1', 'gagal'),
+(72, 'admin', '2018-08-10 00:24:17', '::1', 'berhasil'),
+(73, 'mal', '2018-08-10 00:25:17', '::1', 'berhasil');
 
 -- --------------------------------------------------------
 
@@ -130,6 +158,7 @@ INSERT INTO `login` (`username`, `password`, `email`, `level`) VALUES
 ('kolak', 'kolak', 'kolak@kolak', 4),
 ('mal', 'mal', 'mal@mal.com', 4),
 ('mal2', 'mal', 'mal@mal.com', 4),
+('ryan', 'ryan', 'ryan@tyan.com', 4),
 ('user001', 'user001', 'user@gmaiil.com', 4),
 ('wisnu', '12345', 'wisnuwinz@gmail.com', 4);
 
@@ -153,7 +182,10 @@ CREATE TABLE `pembayaran` (
 
 INSERT INTO `pembayaran` (`kode_pembayaran`, `kode_pembelian`, `total_harga_pembayaran`, `file_bukti_pembayaran`, `status`) VALUES
 (1, 7, 2341500, 'logo-bank-mandiri.png', 0),
-(2, 8, 8700000, 'bisnis-online.jpg', 0);
+(2, 8, 8700000, 'bisnis-online.jpg', 0),
+(3, 9, 7770000, 'jiraiya2.jpg', 1),
+(4, 10, 9000000, 'logo.jpg', 2),
+(5, 11, 63000, 'sancu-tayo.png', 1);
 
 -- --------------------------------------------------------
 
@@ -184,7 +216,10 @@ INSERT INTO `pembelian` (`kode_pembelian`, `username`, `metode_packing`, `metode
 (5, 'mal', 'Kardus', 'Diambil', '', '', '2018-07-24 01:16:33', 'Mal', '+622187704765', 'JALAN KELAPA DUA WETAN III NO 29'),
 (6, 'mal', 'semen', 'Go Send', '', '', '2018-07-26 23:30:34', 'solatip', '+622187704765', 'JALAN KELAPA DUA WETAN III NO 29'),
 (7, 'mal', 'semen', 'Go Send', '', '', '2018-07-26 23:30:53', 'solatip', '+622187704765', 'JALAN KELAPA DUA WETAN III NO 29'),
-(8, 'kolak', 'semen', 'Diantar', '', '', '2018-07-27 14:44:18', 'kolak pisang', '02187704765', 'asd');
+(8, 'kolak', 'semen', 'Diantar', '', '', '2018-07-27 14:44:18', 'kolak pisang', '02187704765', 'asd'),
+(9, 'mal', 'Kardus', 'Diambil', '', '', '2018-07-27 18:10:31', 'Mal', '02187704765', 'asdasd'),
+(10, 'ryan', 'Kardus', 'Go Send', '', '', '2018-08-03 19:13:31', 'Ryan', '01203120301230', 'Jalan Bekasi'),
+(11, 'mal', 'semen', 'Diambil', '', '1', '2018-08-08 01:57:05', 'Mal', '+622187704765', 'JALAN KELAPA DUA WETAN III NO 29');
 
 -- --------------------------------------------------------
 
@@ -214,7 +249,12 @@ INSERT INTO `pembelian_detail` (`kode_pembelian_detail`, `kode_pembelian`, `juml
 (8, 7, 42, 9),
 (9, 8, 50, 4),
 (10, 8, 40, 5),
-(11, 8, 10, 7);
+(11, 8, 10, 7),
+(12, 9, 50, 4),
+(13, 9, 90, 6),
+(14, 10, 5, 1),
+(15, 10, 100, 4),
+(16, 11, 2, 8);
 
 -- --------------------------------------------------------
 
@@ -247,7 +287,8 @@ INSERT INTO `produk` (`kode_produk`, `nama_produk`, `kode_kategory`, `harga_prod
 (8, 'Sabun Dettol Batangan', 'kat003', 31500, 'Sabun Dettol batangan isi 10', 'pak', 'sabun-batangan-dettol.jpg'),
 (9, 'Sabun Batangan Lifebuoy', 'kat003', 40000, 'Sabun batangan Lifebuoy isi 10', 'pak', 'sabun-batangan-lifebuoy.jpg'),
 (10, 'Sabun Mandi Cair Dove 100ml', 'kat003', 400000, 'Sabun Badan Cair Dove 100ml', 'dus', 'sabun-mandi-cair-dove.jpg'),
-(11, 'Sampo Head and Shoulders Saset', 'kat003', 61000, 'Sabun sasetan head and shoulders', 'renceng', 'sampo-saset-head-and-shoulders.jpg');
+(11, 'Sampo Head and Shoulders Saset', 'kat003', 61000, 'Sabun sasetan head and shoulders', 'renceng', 'sampo-saset-head-and-shoulders.jpg'),
+(13, 'Pensil 2B Faber Castell', 'kat004', 45000, 'Pensil 2B Faber Castell 1 pak isi 6 pensil', 'pak', 'pensil-2b-faber-castell.jpg');
 
 -- --------------------------------------------------------
 
@@ -276,7 +317,8 @@ INSERT INTO `stok` (`kode_stok`, `kode_produk`, `jumlah_stok`) VALUES
 (8, 8, 325),
 (9, 9, 113),
 (10, 10, 44),
-(11, 11, 555);
+(11, 11, 555),
+(12, 13, 0);
 
 --
 -- Indexes for dumped tables
@@ -338,38 +380,32 @@ ALTER TABLE `stok`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `kode_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
-
+  MODIFY `kode_log` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 --
 -- AUTO_INCREMENT for table `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+  MODIFY `kode_pembayaran` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
+  MODIFY `kode_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `pembelian_detail`
 --
 ALTER TABLE `pembelian_detail`
-  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
+  MODIFY `kode_pembelian_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `kode_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
+  MODIFY `kode_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `stok`
 --
 ALTER TABLE `stok`
-  MODIFY `kode_stok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-COMMIT;
+  MODIFY `kode_stok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
