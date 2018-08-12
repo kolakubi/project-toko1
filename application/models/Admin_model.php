@@ -28,23 +28,54 @@
 
         } // end of function ambilDataPembayaran
 
-        public function ambilDataProduk(){
+        public function ambilDataProduk($kodeProduk=null){
+
+            $hasil = array();
 
             $this->db->select('*');
             $this->db->from('produk');
-            $hasil = $this->db->get()->result_array();
+            // jika ada kode produk
+            if($kodeProduk){
+                $this->db->where('kode_produk', $kodeProduk);
+                $hasil = $this->db->get()->row_array();
+            }
+            // jika tdk ada
+            else{
+                $hasil = $this->db->get()->result_array();
+            }
             return $hasil;
 
         } // end of function ambilDataProduk
 
-        public function ambilDataStok(){
+        public function ambilDataStok($kodeStok=null){
+
+            $hasil = array();
 
             $this->db->select('*');
             $this->db->from('stok');
-            $hasil = $this->db->get()->result_array();
+            $this->db->join('produk', 'produk.kode_produk = stok.kode_produk');
+            // jika ada kodeStok
+            if($kodeStok){
+                $this->db->where('kode_stok', $kodeStok);
+                $hasil = $this->db->get()->row_array();
+            }
+            else{
+                $hasil = $this->db->get()->result_array();
+            }
+            
             return $hasil;
 
         } // end of function ambilDataStok
+
+        public function stokUbah($kodeStok, $stok){
+
+            $this->db->set(array('jumlah_stok' => $stok));
+            $this->db->where('kode_stok', $kodeStok);
+            $this->db->update('stok');
+
+            return true;
+
+        } // end of stokUbah
 
         public function pembayaranValid($kodePembayaran){
 
@@ -107,5 +138,15 @@
             return true;
 
         } // end of function produkTambah
+
+        public function produkUbah($kodeProduk, $dataProduk){
+
+            $this->db->set($dataProduk);
+            $this->db->where('kode_produk', $kodeProduk);
+            $this->db->update('produk');
+
+            return true;
+
+        } // end of function produkUbah
 
     }

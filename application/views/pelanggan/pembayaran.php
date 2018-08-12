@@ -8,6 +8,7 @@
             <thead>
                 <tr class="info">
                     <th>Kode Pembelian</th>
+                    <th>Tanggal Pembelian</th>
                     <th>Total Harga Pesanan</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -18,6 +19,7 @@
                 <?php foreach($hasil as $pembayaran) : ?>
                     <tr>
                         <td><?php echo $pembayaran['kode_pembelian'] ?></td>
+                        <td><?php echo $pembayaran['tanggal_pembelian'] ?></td>
                         <td><?php echo 'Rp '.number_format($pembayaran['total_harga_pembayaran'], 0, ',', '.') ?></td>
                         <td class="<?php if($pembayaran['status'] == 0 || $pembayaran['status'] == 3){echo 'warning';}elseif($pembayaran['status']==2){echo 'info';}else{echo 'success';}?>">
                             <?php if($pembayaran['status'] == 0){echo "belum ada berkas";}elseif($pembayaran['status']==2){echo 'berkas sedang diperikas';}elseif($pembayaran['status']==3){echo 'berkas tidak valid';}else{echo 'Lunas';} ?>

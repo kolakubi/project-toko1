@@ -260,7 +260,9 @@
 
         public function pembayaran(){
 
-            $hasil = $this->pelanggan_model->ambilPembayaran();
+            $username = $_SESSION['username'];
+
+            $hasil = $this->pelanggan_model->ambilPembayaranUsername($username);
             $data['hasil'] = $hasil;
 
             $this->load->view('pelanggan/header');

@@ -33,7 +33,7 @@
                         <td><?php echo 'Rp '.number_format($produk['harga_satuan'], 0, ',', '.') ?></td>
                         <td><?php echo $produk['jumlah_produk'] ?></td>
                         <td><?php echo 'Rp '.number_format($produk['harga_produk_akumulasi'], 0, ',', '.') ?></td>
-                        <td><a href="<?php echo base_url()?>home/hapusItemKeranjang/<?php echo $index ?>"  class="btn btn-danger">-</a></td>
+                        <td><a href="<?php echo base_url()?>pelanggan/hapusItemKeranjang/<?php echo $index ?>"  class="btn btn-danger">-</a></td>
                     </tr>
                     <?php $index++ ?>
                     <?php $totalItem += $produk['jumlah_produk'] ?>

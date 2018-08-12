@@ -114,10 +114,11 @@
 
             $this->db->select('*');
             $this->db->from('pembayaran');
+            $this->db->join('pembelian', 'pembelian.kode_pembelian = pembayaran.kode_pembayaran');
             
             // jika ada kode Pembayaran
             if($kodePembayaran){
-                $this->db->where('kode_pembayaran', $kodePembayaran);
+                $this->db->where('pembayaran.kode_pembayaran', $kodePembayaran);
                 $hasil = $this->db->get()->row_array();
             }
             else{
@@ -127,5 +128,16 @@
             return $hasil;
 
         } // end of function ambilPembayaran
+
+        public function ambilPembayaranUsername($username){
+
+            $this->db->select('*');
+            $this->db->from('pembayaran');
+            $this->db->join('pembelian', 'pembelian.kode_pembelian = pembayaran.kode_pembelian');
+            $this->db->where('pembelian.username', $username);
+            $hasil = $this->db->get()->result_array();
+            return $hasil;
+
+        } // end of function ambilPembayaranUsername
 
     }

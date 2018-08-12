@@ -23,7 +23,6 @@
 
             <thead>
                 <tr class="info">
-                    <th class="text-center">No</th>
                     <th class="text-center">Kode Produk</th>
                     <th class="text-center">Kategori</th>
                     <th class="text-center">Nama Produk</th>
@@ -36,9 +35,7 @@
             </thead>
             <tbody>
                 <?php foreach($hasil as $produk) : ?>
-                    <?php $index++ ?>
                     <tr>
-                        <td><?php echo $index ?></td>
                         <td><?php echo $produk['kode_produk'] ?></td>
                         <td><?php echo $produk['kode_kategory'] ?></td>
                         <td><?php echo $produk['nama_produk'] ?></td>
@@ -48,7 +45,7 @@
                         <td>
                             <img src="<?php echo base_url().'asset/image/produk/'.$produk['gambar_produk'] ?>" alt="" class="img img-responsive" style="max-width: 50px">
                         </td>
-                        <td><a href="" class="btn btn-danger">Ubah</a></td>
+                        <td><a href="<?php echo base_url() ?>admin/produkubah/<?php echo $produk['kode_produk'] ?>" class="btn btn-danger">Ubah</a></td>
                     </tr>
                 <?php endforeach ?>
             </tbody>
