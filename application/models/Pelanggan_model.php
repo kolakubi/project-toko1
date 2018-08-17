@@ -132,8 +132,8 @@
         public function ambilPembayaranUsername($username){
 
             $this->db->select('*');
-            $this->db->from('pembayaran');
-            $this->db->join('pembelian', 'pembelian.kode_pembelian = pembayaran.kode_pembelian');
+            $this->db->from('pembelian');
+            $this->db->join('pembayaran', 'pembelian.kode_pembelian = pembayaran.kode_pembelian');
             $this->db->where('pembelian.username', $username);
             $hasil = $this->db->get()->result_array();
             return $hasil;

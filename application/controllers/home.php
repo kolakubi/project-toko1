@@ -59,6 +59,8 @@
 
             $hasil = $this->home_model->ambilProdukDanStok($kodeProduk);
             $data['produk'] = $hasil;
+            $data['jumlah_tidak_valid'] = false;
+            $data['stok_kurang'] = false;
 
             // $this->cekArray($hasil);
 
@@ -93,6 +95,8 @@
                 if(!$this->form_validation->run()){
 
                     $data['produk'] = $hasil;
+                    $data['jumlah_tidak_valid'] = false;
+                    $data['stok_kurang'] = false;
 
                     //$this->cekArray($hasil);
 
@@ -114,15 +118,47 @@
                         'harga_produk_akumulasi' => $hasil['harga_produk']*$banyakItem
                     );
 
-                    // simpan data di session
-                    // jika keranjang belum ada
-                    // buat session keranjang
-                    if(empty($_SESSION['keranjang'])){
-                        $_SESSION['keranjang'] = array();
-                    }
-                    array_push($_SESSION['keranjang'], $itemYangDibeli);
+                    // jika jumlah produk 0
+                    if($banyakItem == 0){
+                        $data['produk'] = $hasil;
+                        $data['jumlah_tidak_valid'] = true;
+                        $data['stok_kurang'] = false;
 
-                    redirect('pelanggan/keranjang');
+                        //$this->cekArray($hasil);
+
+                        $this->load->view('front/header');
+                        $this->load->view('front/produkdetail', $data);
+                        $this->load->view('front/footer');
+                    }
+                    else{
+
+                        // cek jika jumlah tidak melebihi stok yg ada
+                        if(($hasil['jumlah_stok']-$banyakItem) < 0){
+                            $data['produk'] = $hasil;
+                            $data['jumlah_tidak_valid'] = false;
+                            $data['stok_kurang'] = true;
+
+                            //$this->cekArray($hasil);
+
+                            $this->load->view('front/header');
+                            $this->load->view('front/produkdetail', $data);
+                            $this->load->view('front/footer');
+                        }
+                        else{
+
+                            // simpan data di session
+                            // jika keranjang belum ada
+                            // buat session keranjang
+                            if(empty($_SESSION['keranjang'])){
+                                $_SESSION['keranjang'] = array();
+                            }
+                            array_push($_SESSION['keranjang'], $itemYangDibeli);
+
+                            redirect('pelanggan/keranjang');
+
+                        } // end of cek ketersedian stok
+
+                    } // enf of jika produk 0
 
                 } // end of validasi form
 

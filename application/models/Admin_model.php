@@ -79,6 +79,24 @@
 
         public function pembayaranValid($kodePembayaran){
 
+            // ambil kode pembelian
+            $kodePembelian = $this->ambilDataPembayaran($kodePembayaran);
+            $kodePembelian = $kodePembelian['kode_pembelian'];
+            
+            // ambil produk dari pembelian_detail
+            $produk = $this->ambilPembelianDetailJoinStok($kodePembelian);  
+
+            // loop produk, cek apakah jumlah melebihi stok
+            foreach($produk as $pro){
+                if($pro['jumlah_item_pembelian_detail']> $pro['jumlah_stok']){
+                    return false;
+                }
+                else{
+                    // update stok
+                    $this->stokUbah($pro['kode_stok'], $pro['jumlah_stok']-$pro['jumlah_item_pembelian_detail']);
+                }
+            }
+
             // update pembayaran
             $this->db->set(
                 array('status' => 1)
@@ -86,11 +104,7 @@
             $this->db->where('kode_pembayaran', $kodePembayaran);
             $this->db->update('pembayaran');
 
-            // update pebelian
-            // ambil kode pembelian
-            $kodePembelian = $this->ambilDataPembayaran($kodePembayaran);
-            $kodePembelian = $kodePembelian['kode_pembelian'];
-
+            // update pembelian
             $this->db->set(
                 array('status' => 1)
             );
@@ -100,6 +114,18 @@
             return true;
 
         } // end of function pembayaranValid
+
+        public function ambilPembelianDetailJoinStok($kodePembelian){
+
+            $this->db->select('*');
+            $this->db->from('pembelian_detail');
+            $this->db->join('stok', 'pembelian_detail.kode_produk = stok.kode_produk');
+            $this->db->where('pembelian_detail.kode_pembelian', $kodePembelian);
+            $hasil = $this->db->get()->result_array();
+
+            return $hasil;
+
+        } // end of ambilPembelianDetailJoinStok
 
         public function pembayaranTidakValid($kodePembayaran){
 

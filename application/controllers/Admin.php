@@ -25,6 +25,7 @@
 
             $hasil = $this->admin_model->ambilDataPembayaran();
             $data['hasil'] = $hasil;
+            $data['stok_kurang'] = false;
 
             // echo '<pre>';
             // print_r($hasil);
@@ -193,19 +194,31 @@
                     redirect('admin/produk');
                 }
 
-
-
             } // end of form_validation
-
-            
 
         } // end of function produk
 
         public function pembayaranValid($kodePembayaran){
 
-            $this->admin_model->pembayaranValid($kodePembayaran);
+            $hasil = $this->admin_model->pembayaranValid($kodePembayaran);
 
-            redirect('admin');
+            // echo '<pre>';
+            // print_r($hasil);
+            // echo '</pre>';
+
+            if($hasil){
+                redirect('admin');
+            }
+            else{
+                $hasil = $this->admin_model->ambilDataPembayaran();
+                $data['hasil'] = $hasil;
+                $data['stok_kurang'] = true;
+
+                $this->load->view('admin/header');
+                $this->load->view('admin/pembayaran', $data);
+                $this->load->view('front/footer');
+            }
+            
 
         } // end of function pembayaranValid
 

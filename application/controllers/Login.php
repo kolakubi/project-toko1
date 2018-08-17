@@ -110,13 +110,9 @@
 					if($level === '1'){ 
 						redirect('admin');
 					}
-					// keuangan
+					// pemilik
 					else if($level === '2'){
-						redirect('agen');
-					}
-					// direktur
-					else if($level === '3'){
-						redirect('agen');
+						redirect('pemilik');
 					}
 					// calon jamaah
 					else if($level === '4'){

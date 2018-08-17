@@ -24,8 +24,8 @@
                         <td><?php echo 'Rp '.number_format($pembelian['total_harga_pembayaran'], 0, ',', '.') ?></td>
                         <td><?php echo $pembelian['tanggal_pembelian'] ?></td>
                         <!-- status pembelian -->
-                        <td class="<?php if($pembelian['status']){echo 'success';}else{echo 'warning';} ?>">
-                            <?php if($pembelian['status']){echo 'Lunas';}else{echo 'di proses';} ?>
+                        <td class="<?php if($pembelian['status'] == 1){echo 'success';}elseif($pembelian['status'] == 2){echo 'warning';}elseif($pembelian['status'] == 0){echo 'default';} ?>">
+                            <?php if($pembelian['status'] == 1){echo 'Lunas';}elseif($pembelian['status'] == 2){echo 'di proses';}elseif($pembelian['status'] == 0){echo 'belum ada berkas';}else{echo 'berkas tidak valid, mohon upload kembali';} ?>
                         </td>
                         <td>
                             <a href="<?php echo base_url() ?>pelanggan/pesanandetail/<?php echo $pembelian['kode_pembelian'] ?>" class="btn btn-info">Detail</a>

@@ -52,6 +52,16 @@
                         </td>
                     </tr>
                 <?php endforeach ?>
+
+                <!-- warning stok kurang -->
+                <?php if($stok_kurang) : ?>
+                    <tr>
+                        <td colspan="5" class="warning text-center">
+                            stok kurang <a href="<?php echo base_url() ?>admin/stok" class="btn btn-info">Lihat stok</a>
+                        </td>
+                    </tr>
+                <?php endif ?>
+
             </tbody>
         
         </table>
